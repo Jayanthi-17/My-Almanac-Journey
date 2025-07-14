@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Almanac Tools | Frontend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a934a;
+            --secondary: #2c5e2c;
+            --light: #f8f9fa;
+            --dark: #2d3a2d;
+            --highlight: #6cbf6c;
+            --accent: #ff914d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: #f5f7f6;
+        }
+
+        /* Navigation */
+        .main-nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Tools Section */
+        .tools-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Tool Cards */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .tool-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tool-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .tool-card:hover .tool-image img {
+            transform: scale(1.05);
+        }
+
+        .tool-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .tool-content {
+            padding: 25px;
+        }
+
+        .tool-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .tool-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .tool-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tool-link:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 94, 44, 0.3);
+        }
+
+        .tool-link i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .tool-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">Almanac Journey</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#tools">My Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tools Section -->
+    <section class="tools-container" id="tools">
+        <div class="section-header">
+            <h2>My Almanac Tools</h2>
+            <p>During my internship at Almanac.com, I developed these practical tools that serve thousands of users daily. Each one solves unique problems for gardeners and farmers.</p>
+        </div>
+        
+        <div class="tool-grid">
+            <!-- Tool 1 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Mulch Calculator">
+                    <div class="tool-number">1</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Mulch Calculator</h3>
+                    <p>An interactive calculator that helps gardeners determine the exact amount of mulch needed for their garden beds based on dimensions and desired depth. Features real-time calculations and visual feedback.</p>
+                    <a href="https://almanac.com/mulch-calculator" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 2 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Planting Calendar">
+                    <div class="tool-number">2</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Planting Calendar</h3>
+                    <p>A dynamic calendar that shows optimal planting dates for various crops based on location and frost dates. Includes filtering options and personalized recommendations.</p>
+                    <a href="https://almanac.com/planting-calendar" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 3 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Garden Planner">
+                    <div class="tool-number">3</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Garden Planner</h3>
+                    <p>An interactive tool that helps users design their garden layout with drag-and-drop functionality. Calculates plant spacing and provides companion planting suggestions.</p>
+                    <a href="https://almanac.com/garden-planner" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Add more tools following the same pattern -->
+            <!-- Tool 4 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Frost Dates Finder">
+                    <div class="tool-number">4</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Frost Dates Finder</h3>
+                    <p>A location-based tool that predicts first and last frost dates for any zip code in the US. Helps gardeners plan their planting schedule effectively.</p>
+                    <a href="https://almanac.com/frost-dates" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 5 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1605007493699-af65834f8a00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Soil Calculator">
+                    <div class="tool-number">5</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Soil Calculator</h3>
+                    <p>Calculates the amount of soil amendments needed for garden beds based on soil test results. Provides recommendations for improving soil health.</p>
+                    <a href="https://almanac.com/soil-calculator" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 6 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Companion Planting Guide">
+                    <div class="tool-number">6</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Companion Planting Guide</h3>
+                    <p>An interactive guide that shows which plants grow well together and which should be kept apart. Features search functionality and visual pairings.</p>
+                    <a href="https://almanac.com/companion-planting" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 7 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Watering Calculator">
+                    <div class="tool-number">7</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Watering Calculator</h3>
+                    <p>Determines optimal watering schedules for different plants based on local weather conditions, soil type, and plant water needs.</p>
+                    <a href="https://almanac.com/watering-calculator" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tool 8 -->
+            <div class="tool-card">
+                <div class="tool-image">
+                    <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Harvest Tracker">
+                    <div class="tool-number">8</div>
+                </div>
+                <div class="tool-content">
+                    <h3>Harvest Tracker</h3>
+                    <p>Helps gardeners track their harvest yields over time with visual charts. Can predict future yields based on current growth patterns.</p>
+                    <a href="https://almanac.com/harvest-tracker" class="tool-link" target="_blank">
+                        View Tool <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Your Name | Almanac Journey</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.tool-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

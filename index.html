@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Almanac Journey | Frontend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a934a;
+            --secondary: #2c5e2c;
+            --light: #f8f9fa;
+            --dark: #2d3a2d;
+            --highlight: #6cbf6c;
+            --accent: #ff914d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: #f5f7f6;
+        }
+
+        /* Animated Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 80px 5% 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Header First */
+        .hero-header {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .hero-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-header h2 {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .college {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Image Second */
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 40px;
+            max-width: 350px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
+        }
+
+        .profile-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 5px solid white;
+        }
+
+        /* Description Third */
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.9s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .journey-text {
+            line-height: 1.7;
+            margin: 0 0 25px 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 20px;
+            text-align: center;
+        }
+
+        .journey-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: rgba(74, 147, 74, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(74, 147, 74, 0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--primary), var(--highlight));
+            color: white;
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 147, 74, 0.3);
+        }
+
+        .btn.secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn.secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 5% 30px;
+            }
+            
+            .hero-header {
+                margin-bottom: 30px;
+            }
+            
+            .hero-image {
+                margin-bottom: 30px;
+                max-width: 280px;
+            }
+            
+            .journey-text {
+                padding-left: 0;
+            }
+            
+            .journey-text::before {
+                display: none;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-elements">
+        <div class="bg-element" style="top:10%;left:5%;width:80px;animation-delay:0s;">
+            <i class="fas fa-leaf" style="font-size:80px;color:var(--primary);"></i>
+        </div>
+        <div class="bg-element" style="top:20%;left:80%;width:60px;animation-delay:2s;">
+            <i class="fas fa-seedling" style="font-size:60px;color:var(--primary);"></i>
+        </div>
+        <div class="bg-element" style="top:60%;left:15%;width:100px;animation-delay:4s;">
+            <i class="fas fa-tree" style="font-size:100px;color:var(--primary);"></i>
+        </div>
+        <div class="bg-element" style="top:70%;left:70%;width:50px;animation-delay:6s;">
+            <i class="fas fa-feather" style="font-size:50px;color:var(--primary);"></i>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- 1. Header First -->
+            <div class="hero-header">
+                <h1>Hello, I'm <span>Kilari Jayanthi</span></h1>
+                <h2>Frontend Developer Intern @ Almanac.com</h2>
+                <p class="college">Computer Science Student<br> at <br>St.Mary's Group of Institutions Hyderabad</p>
+            </div>
+            
+            <!-- 2. Image Second -->
+            <div class="hero-image">
+                <img src="./my-image.jpg" 
+                     alt="Your Name" 
+                     class="profile-img">
+            </div>
+            
+            <!-- 3. Description Third -->
+            <div class="hero-description">
+                <p class="journey-text">
+                    As a frontend developer at Almanac.com, I've designed and built eight interactive web tools serving thousands of daily users. My journey began with the Mulch Calculator, where I learned to create intuitive agricultural interfaces.
+                    <br><br>
+                    Each tool presented unique challenges that helped me grow my skills in responsive design, performance optimization, and accessibility. I've focused on creating seamless experiences with clean animations and maintainable code.
+                    <br><br>
+                    My work at Almanac has strengthened my expertise in modern CSS, JavaScript animations, and cross-browser compatibility while solving real-world problems for gardeners and farmers.
+                </p>
+                
+                <div class="tech-stack">
+                    <span class="tech-item">HTML5</span>
+                    <span class="tech-item">CSS3</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">Responsive Design</span>
+                    <span class="tech-item">UI/UX Principles</span>
+                    <span class="tech-item">CSS Animations</span>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="#tools" class="btn primary" src="./tools.html">
+                        <i class="fas fa-laptop-code"></i> View My Tools
+                    </a>
+                    <a href="#" class="btn secondary">
+                        <i class="fas fa-file-alt"></i> See My Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create additional floating background elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgElements = document.querySelector('.bg-elements');
+            const icons = ['leaf', 'seedling', 'tree', 'feather', 'spa', 'cloud'];
+            const colors = ['#4a934a', '#2c5e2c', '#6cbf6c', '#ff914d'];
+            
+            for (let i = 0; i < 8; i++) {
+                const element = document.createElement('div');
+                element.className = 'bg-element';
+                
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                const randomSize = Math.floor(Math.random() * 30) + 30;
+                const randomLeft = Math.floor(Math.random() * 90);
+                const randomTop = Math.floor(Math.random() * 90);
+                const randomDelay = Math.floor(Math.random() * 8);
+                const randomDuration = Math.floor(Math.random() * 10) + 10;
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                element.style.cssText = `
+                    top:${randomTop}%;
+                    left:${randomLeft}%;
+                    width:${randomSize}px;
+                    animation-delay:${randomDelay}s;
+                    animation-duration:${randomDuration}s;
+                `;
+                
+                element.innerHTML = `<i class="fas fa-${randomIcon}" style="font-size:${randomSize}px;color:${randomColor};"></i>`;
+                bgElements.appendChild(element);
+            }
+        });
+    </script>
+</body>
+</html>
